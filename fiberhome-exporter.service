@@ -1,0 +1,13 @@
+[Unit]
+Description=FiberHome Prometheus Exporter
+After=network.target
+
+[Service]
+ExecStart=/path/to/python3 /path/to/your_exporter_script.py
+Restart=always
+RestartSec=5
+User=your_username
+Group=your_group
+
+[Install]
+WantedBy=multi-user.target
