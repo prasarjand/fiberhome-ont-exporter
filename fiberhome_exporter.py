@@ -23,7 +23,7 @@ transceivertemperature_metric  = Gauge('fiberhome_transceivertemperature', 'Fibe
 # FiberHome ONT device information
 ONT_IP = '192.168.1.1'
 ONT_USERNAME = 'user'
-ONT_PASSWORD_HASH = '851AC19A19A523A64F361CEFD6908AAF'  # Replace with the actual password hash
+ONT_PASSWORD_HASH = '851AC19A19A523A64F361CEFD6908AAF'  # This hash for user1234 password, Replace with the actual password hash
 
 def get_session():
     response = requests.get(f'http://{ONT_IP}/cgi-bin/ajax?ajaxmethod=get_refresh_sessionid', verify=False)
