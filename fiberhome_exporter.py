@@ -67,25 +67,18 @@ def logout(session_id):
         'ajaxmethod': 'do_logout'
     }
     requests.post(f'http://{ONT_IP}/cgi-bin/ajax', data=data, verify=False)
-
+    
 
 if __name__ == '__main__':
-    session_id = get_session()
-
-    if session_id:
-        start_http_server(8000)  # Start Prometheus exporter on port 8000
-        print ("Starting at port :8080")
-        try:
+    start_http_server(8000)
+    print ("Starting at port :8080")
+    while True:
+        session_id = get_session()
+        if session_id:
             logged_in_session_id = login(session_id)
             if logged_in_session_id:
-                while True:
-                    print ("Pulling metrics..")
-                    get_metrics(logged_in_session_id)
-                    time.sleep(30)  # Update metrics every 30 Seconds
-        except KeyboardInterrupt:
-            pass
-        finally:
-            logout(logged_in_session_id)
-    else:
-        print ("Cant reach ont.. ")
+                print("Pulling metrics..")
+                get_metrics(logged_in_session_id)
+                logout(logged_in_session_id)
+        time.sleep(30)  # Update metrics every 30 Seconds
 
